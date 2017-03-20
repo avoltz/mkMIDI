@@ -1,0 +1,17 @@
+canvas {
+  border: 1px solid #aaa;
+  border-radius: 0.2em;
+  color: black;
+}
+canvas {
+  background-color: white;
+}
+canvas:hover {
+  background-color: #ddd;
+}
+canvas.pressed {
+  background-color: #aaa;
+}
+div {
+  margin-bottom: 0.5em;
+}
