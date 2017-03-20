@@ -21,6 +21,13 @@ class Button {
       ctx.beginPath();
       return ctx;
   }
+  resize(height, width) {
+    this.element.height = height;
+    this.element.width = width;
+    this.draw();
+  }
+  get width() { return this.element.width; };
+  get height() { return this.element.height; }
 }
 
 class GroupButton extends Button {

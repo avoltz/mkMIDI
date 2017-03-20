@@ -16,6 +16,9 @@ canvas:hover {
 canvas.pressed {
   background-color: #aaa;
 }
+div {
+  margin-bottom: 0.5em;
+}
 </style>
 </head>
 <body>
@@ -24,6 +27,7 @@ canvas.pressed {
 <div id="square"></div>
 <div id="triangle"></div>
 <div id="sawtooth"></div>
+<button id="resize"><label>Click to resize</label></button>
 <script type="text/javascript">
   (function() {
     var grp = document.getElementById("group");
@@ -35,6 +39,11 @@ canvas.pressed {
     var t_widget = new TriangleButton(triangle, 40, 80);
     var sawtooth = document.getElementById("sawtooth");
     var s_widget = new SawtoothButton(sawtooth, 40, 80);
+
+    var res = document.getElementById("resize");
+    res.onclick = function() {
+      s_widget.resize(s_widget.height*2, s_widget.width*2);
+    };
   })();
 </script>
 </body>
