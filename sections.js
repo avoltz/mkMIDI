@@ -8,4 +8,7 @@
   Section.add_class('saw_btn', SawtoothButton, ['height', 'width']);
   Section.add_class('sq_btn', SquareButton, ['height', 'width']);
   Section.add_class('tri_btn', TriangleButton, ['height', 'width']);
+
+  // adsrview
+  Section.add_class('adsr', ADSRView, ['max', 'height', 'width', 'values']);
 }
