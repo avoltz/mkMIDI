@@ -1,0 +1,39 @@
+<html>
+<head>
+<script src="instrument.js" type="text/javascript"></script>
+<script src="combos.js" type="text/javascript"></script>
+<script src="buttons.js" type="text/javascript"></script>
+<script src="sections.js" type="text/javascript"></script>
+<script type="text/javascript">
+var my_synth = {
+  'name' : 'my synthesizer',
+  'sections' : [
+    {
+      'name' : 'misc section',
+      'widgets' : [
+        {
+          'type' : 'combo',
+          'labels' : ['c1l1', 'c1l2', 'c1l3'],
+          'values' : ['c1v1', 'c1v2', 'c1v3'],
+          'title' : 'wow title'
+        },
+        {
+          'type' : 'combo',
+          'labels' : ['c2l1', 'c2l2'],
+          'values' : ['c2v1', 'c2v2']
+        }
+      ]
+    }
+  ]
+};
+</script>
+</head>
+<body>
+<div id="synth"></div>
+<script type="text/javascript">
+(function(){
+  let inst = new Instrument(document.getElementById("synth"), my_synth);
+})();
+</script>
+</body>
+</html>
