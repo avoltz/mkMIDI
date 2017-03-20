@@ -1,12 +1,12 @@
 class Button {
   constructor(el, cls, height, width) {
     this.pressed = false;
-    var new_el = document.createElement("canvas");
+    let new_el = document.createElement("canvas");
     new_el.className = cls;
     new_el.height = height;
     new_el.width = width;
     {
-      var self = this;
+      let self = this;
       new_el.onclick = function() {
         self.pressed = ! self.pressed;
         self.element.className = self.pressed ? `${cls} pressed` : cls;
@@ -16,7 +16,7 @@ class Button {
     el.appendChild(this.element);
   }
   setup_context() {
-      var ctx = this.element.getContext("2d");
+      let ctx = this.element.getContext("2d");
       ctx.clearRect(0, 0, this.element.width, this.element.height);
       ctx.beginPath();
       return ctx;
@@ -36,9 +36,9 @@ class GroupButton extends Button {
     this.draw();
   }
   draw() {
-    var ctx = this.setup_context();
-    var mid_height = this.element.height / 2;
-    var mid_width = this.element.width / 2;
+    let ctx = this.setup_context();
+    let mid_height = this.element.height / 2;
+    let mid_width = this.element.width / 2;
     ctx.moveTo(1 / 8 * this.element.width, mid_height);
     ctx.lineTo(7 / 8 * this.element.width, mid_height);
     ctx.stroke();
@@ -55,10 +55,10 @@ class WaveShapeButton extends Button {
     this.draw();
   }
   setup_context() {
-      var ctx = super.setup_context();
-      var el = this.element;
-      var height = 3 / 4 * this.element.height;
-      var bottom = 1 / 4 * this.element.height;
+      let ctx = super.setup_context();
+      let el = this.element;
+      let height = 3 / 4 * this.element.height;
+      let bottom = 1 / 4 * this.element.height;
       ctx.moveTo(1 / 8 * this.element.width, height);
       return {
         ctx,
@@ -78,7 +78,7 @@ class TriangleButton extends WaveShapeButton {
   }
 
   draw() {
-    var {
+    let {
       ctx,
       height,
       bottom
@@ -96,16 +96,16 @@ class SquareButton extends WaveShapeButton {
     super(el, 'sq_btn', height, width);
   }
   draw() {
-    var {
+    let {
       ctx,
       height,
       bottom
     } = this.setup_context();
-    var x_points = [3 / 16, 7 / 16, 9 / 16, 13 / 16];
-    var y_next = height;
-    var y_nextnext = bottom;
+    let x_points = [3 / 16, 7 / 16, 9 / 16, 13 / 16];
+    let y_next = height;
+    let y_nextnext = bottom;
     x_points.forEach(x => {
-        var width = x * this.element.width;
+        let width = x * this.element.width;
         ctx.lineTo(width, y_next);
         ctx.lineTo(width, y_nextnext);
         // reuse width here as a place to keep y_next so we swap...
@@ -123,14 +123,14 @@ class SawtoothButton extends WaveShapeButton {
     super(el, 'saw_btn', height, width);
   }
   draw() {
-    var {
+    let {
       ctx,
       height,
       bottom
     } = this.setup_context();
-    var x_points = [5 / 16, 1 / 2, 11 / 16, 14 / 16];
+    let x_points = [5 / 16, 1 / 2, 11 / 16, 14 / 16];
     x_points.forEach(x => {
-      var width = x * this.element.width;
+      let width = x * this.element.width;
       ctx.lineTo(width, bottom);
       ctx.lineTo(width, height);
     })
