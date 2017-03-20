@@ -5,6 +5,10 @@ class Section {
     name_lbl.innerHTML = section.name;
     section.widgets.forEach(widget => {
       var args = ["thisarg", section_el];
+      // if we are creating a section, we have to reference ourself.
+      if (widget.type == 'section') {
+        args.push(widget);
+      }
       Section.params[widget.type].forEach(p => {
         args.push(widget[p]);
       })
