@@ -48,6 +48,7 @@ class GroupButton extends Button {
     ctx.stroke();
   }
 }
+Section.add_class('grp_btn', GroupButton, ['size']);
 
 class WaveShapeButton extends Button {
   constructor(el, cls, height, width) {
@@ -90,6 +91,7 @@ class TriangleButton extends WaveShapeButton {
     ctx.stroke();
   }
 }
+Section.add_class('tri_btn', TriangleButton, ['height', 'width']);
 
 class SquareButton extends WaveShapeButton {
   constructor(el, height, width) {
@@ -117,6 +119,7 @@ class SquareButton extends WaveShapeButton {
     ctx.stroke();
   }
 }
+Section.add_class('sq_btn', SquareButton, ['height', 'width']);
 
 class SawtoothButton extends WaveShapeButton {
   constructor(el, height, width) {
@@ -137,3 +140,4 @@ class SawtoothButton extends WaveShapeButton {
     ctx.stroke();
   }
 }
+Section.add_class('saw_btn', SawtoothButton, ['height', 'width']);

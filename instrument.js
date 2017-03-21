@@ -36,4 +36,5 @@ class Instrument {
   // setup our static vars
   Section.classes = {};
   Section.params = {};
+  Section.add_class('section', Section, []);
 }

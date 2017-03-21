@@ -22,3 +22,5 @@ class Combo {
     this.element = new_el;
   }
 }
+
+Section.add_class('combo', Combo, ['labels', 'values', 'title']);

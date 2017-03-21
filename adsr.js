@@ -43,3 +43,4 @@ class ADSRView {
     ctx.stroke();
   }
 }
+Section.add_class('adsr', ADSRView, ['max', 'height', 'width', 'values']);
