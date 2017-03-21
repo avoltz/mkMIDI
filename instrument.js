@@ -11,9 +11,9 @@ class Section {
       }
       Section.params[widget.type].forEach(p => {
         args.push(widget[p]);
-      })
-      let child = new (Function.prototype.bind.apply(Section.classes[widget.type], args));
-    })
+      });
+      let child = new (Function.prototype.bind.apply(Section.classes[widget.type], args))();
+    });
     el.appendChild(section_el);
   }
   static add_class(name, cls, params) {
@@ -29,7 +29,7 @@ class Instrument {
     model.sections.forEach(section => {
       // section
       let s = new Section(el, section);
-    })
+    });
   }
 }
 {

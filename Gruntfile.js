@@ -1,11 +1,15 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    jshint: {
+      all : [ '*.js' ],
+      options: {
+        esversion: 6
+      }
+    }
   });
 
-  grunt.registerTask('hello', function() {
-    grunt.log.write('hello world')
-  })
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
-  grunt.registerTask('default', ['hello']);
+  grunt.registerTask('default', ['jshint']);
 };

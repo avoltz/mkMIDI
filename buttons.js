@@ -10,7 +10,7 @@ class Button {
       new_el.onclick = function() {
         self.pressed = ! self.pressed;
         self.element.className = self.pressed ? `${cls} pressed` : cls;
-      }
+      };
     }
     this.element = new_el;
     el.appendChild(this.element);
@@ -26,7 +26,7 @@ class Button {
     this.element.width = width;
     this.draw();
   }
-  get width() { return this.element.width; };
+  get width() { return this.element.width; }
   get height() { return this.element.height; }
 }
 
@@ -51,7 +51,7 @@ class GroupButton extends Button {
 
 class WaveShapeButton extends Button {
   constructor(el, cls, height, width) {
-    super(el, cls, height, width)
+    super(el, cls, height, width);
     this.draw();
   }
   setup_context() {
@@ -112,7 +112,7 @@ class SquareButton extends WaveShapeButton {
         width = y_next;
         y_next = y_nextnext;
         y_nextnext = width;
-      })
+      });
     ctx.lineTo(7 / 8 * this.element.width, height);
     ctx.stroke();
   }
@@ -133,7 +133,7 @@ class SawtoothButton extends WaveShapeButton {
       let width = x * this.element.width;
       ctx.lineTo(width, bottom);
       ctx.lineTo(width, height);
-    })
+    });
     ctx.stroke();
   }
 }

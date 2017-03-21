@@ -16,7 +16,7 @@ class Combo {
       op.innerHTML = label;
       op.value = values[i++];
       new_el.appendChild(op);
-    })
+    });
     container.appendChild(new_el);
     el.appendChild(container);
     this.element = new_el;
