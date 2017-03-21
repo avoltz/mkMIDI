@@ -2,6 +2,7 @@ class Slider {
   constructor(el, title) {
     this.value = 0;
     let container = document.createElement("div");
+    container.className = 'slider';
     if (typeof(title) != 'undefined') {
       let new_lbl = document.createElement("label");
       new_lbl.innerHTML = title;

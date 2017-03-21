@@ -1,12 +1,16 @@
 class ADSRView {
   constructor(el, max, height, width, values) {
+    let wrapper = document.createElement("div");
+    wrapper.style.display = 'inline-block';
+    wrapper.className = 'adsrview';
     this.element = document.createElement("canvas");
     this.element.height = height;
     this.height = height;
     this.element.width = width;
     this.width = width / 4;
     this.max = max;
-    el.appendChild(this.element);
+    wrapper.appendChild(this.element);
+    el.appendChild(wrapper);
     if (typeof(values) != 'undefined') {
       let [a, d, s, r] = values;
       this.set_values(a, d, s, r);

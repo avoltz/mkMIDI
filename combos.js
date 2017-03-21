@@ -1,6 +1,8 @@
 class Combo {
   constructor(el, labels, values, title) {
     let container = document.createElement("div");
+    container.style.display = 'inline-block';
+    container.className = 'combo';
     if (typeof(title) != 'undefined') {
       let new_lbl = document.createElement("label");
       new_lbl.innerHTML = title;
