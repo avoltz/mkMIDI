@@ -1,10 +1,11 @@
 class Button {
   constructor(el, style, cls, height, width) {
     this.pressed = false;
+    this.parent_element = el;
     let new_el = document.createElement(cls);
+    this._height = height;
+    this._width = width;
     new_el.className = style;
-    new_el.height = height;
-    new_el.width = width;
     {
       let self = this;
       new_el.onclick = function() {
@@ -15,14 +16,37 @@ class Button {
     this.element = new_el;
     el.appendChild(this.element);
   }
-
-  get width() { return this.element.width; }
-  get height() { return this.element.height; }
+  resize(height, width) {
+    this.element.style = { height : height, width : width };
+  }
+  get height() { return this._height; }
+  get width() { return this._width; }
+  set height(h) { this._height = h; }
+  set width(w) { this._width = w; }
 }
+
+class LabelButton extends Button {
+  constructor(el, label, height, width) {
+    super(el, 'lbl_btn', 'div', height, width);
+    this.element.style = { display: 'inline-block', height : height, width : width };
+    this.element.innerHTML = "&nbsp;";
+    let lbl_el = document.createElement('label');
+    lbl_el.innerHTML = label;
+    this.parent_element.appendChild(lbl_el);
+  }
+  resize(height, width) {
+    this.element.style = { display: 'inline-block', height : height, width : width };
+    this.height = height;
+    this.width = width;
+  }
+}
+Section.add_class('lbl_btn', LabelButton, ['label', 'height', 'width']);
 
 class CanvasButton extends Button {
   constructor(el, style, height, width) {
-    super(el, style, 'canvas', height, width);
+    super(el, style, 'canvas',  height, width);
+    this.element.height = height;
+    this.element.width = width;
   }
   setup_context() {
       let ctx = this.element.getContext("2d");
@@ -35,6 +59,10 @@ class CanvasButton extends Button {
     this.element.width = width;
     this.draw();
   }
+  get height() { return this.element.height; }
+  get width() { return this.element.width; }
+  set height(h) { this.element.height = h; }
+  set width(w) { this.element.width = w; }
 }
 
 class GroupButton extends CanvasButton {
