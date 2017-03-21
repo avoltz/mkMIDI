@@ -1,19 +1,28 @@
 class Button {
-  constructor(el, cls, height, width) {
+  constructor(el, style, cls, height, width) {
     this.pressed = false;
-    let new_el = document.createElement("canvas");
-    new_el.className = cls;
+    let new_el = document.createElement(cls);
+    new_el.className = style;
     new_el.height = height;
     new_el.width = width;
     {
       let self = this;
       new_el.onclick = function() {
         self.pressed = ! self.pressed;
-        self.element.className = self.pressed ? `${cls} pressed` : cls;
+        self.element.className = self.pressed ? `${style} pressed` : style;
       };
     }
     this.element = new_el;
     el.appendChild(this.element);
+  }
+
+  get width() { return this.element.width; }
+  get height() { return this.element.height; }
+}
+
+class CanvasButton extends Button {
+  constructor(el, style, height, width) {
+    super(el, style, 'canvas', height, width);
   }
   setup_context() {
       let ctx = this.element.getContext("2d");
@@ -26,11 +35,9 @@ class Button {
     this.element.width = width;
     this.draw();
   }
-  get width() { return this.element.width; }
-  get height() { return this.element.height; }
 }
 
-class GroupButton extends Button {
+class GroupButton extends CanvasButton {
   constructor(el, size) {
     super(el, 'grp_btn', size, size);
     this.draw();
@@ -50,9 +57,9 @@ class GroupButton extends Button {
 }
 Section.add_class('grp_btn', GroupButton, ['size']);
 
-class WaveShapeButton extends Button {
-  constructor(el, cls, height, width) {
-    super(el, cls, height, width);
+class WaveShapeButton extends CanvasButton {
+  constructor(el, style, height, width) {
+    super(el, style, height, width);
     this.draw();
   }
   setup_context() {
