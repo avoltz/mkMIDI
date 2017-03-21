@@ -1,6 +1,8 @@
 class Section {
   constructor(el, section) {
     let section_el = document.createElement("div");
+    section_el.style.display = 'inline-block';
+    section.className = 'inst_section';
     let name_lbl = document.createElement("label");
     name_lbl.innerHTML = section.name;
     section.widgets.forEach(widget => {

@@ -2,7 +2,12 @@ class Button {
   constructor(el, style, cls, height, width) {
     this.pressed = false;
     this.parent_element = el;
+    let owner = document.createElement('div');
+    owner.className = `base_btn ${style}`;
+    owner.style.position = 'relative';
+    owner.style.display = 'inline-block';
     let new_el = document.createElement(cls);
+
     this._height = height;
     this._width = width;
     new_el.className = style;
@@ -14,10 +19,12 @@ class Button {
       };
     }
     this.element = new_el;
-    el.appendChild(this.element);
+    owner.appendChild(this.element);
+    el.appendChild(owner);
   }
   resize(height, width) {
-    this.element.style = { height : height, width : width };
+    this.element.style.height = height;
+    this.element.style.width = width;
   }
   get height() { return this._height; }
   get width() { return this._width; }
@@ -27,15 +34,19 @@ class Button {
 
 class LabelButton extends Button {
   constructor(el, label, height, width) {
-    super(el, 'lbl_btn', 'div', height, width);
-    this.element.style = { display: 'inline-block', height : height, width : width };
-    this.element.innerHTML = "&nbsp;";
+    super(el, 'lbl_btn', 'a', height, width);
+    this.element.href = "#";
+    this.element.innerHTML = "<div></div>";
+    this.element = this.element.childNodes[0]; // forget parent, use div
+
     let lbl_el = document.createElement('label');
     lbl_el.innerHTML = label;
     this.parent_element.appendChild(lbl_el);
+    this.resize(height, width);
   }
   resize(height, width) {
-    this.element.style = { display: 'inline-block', height : height, width : width };
+    this.element.style.height = height;
+    this.element.style.width = width;
     this.height = height;
     this.width = width;
   }
