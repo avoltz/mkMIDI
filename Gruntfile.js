@@ -6,10 +6,14 @@ module.exports = function(grunt) {
       options: {
         esversion: 6
       }
+    },
+    exec: {
+      server: 'http-server'
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-exec');
 
   grunt.registerTask('default', ['jshint']);
 };
