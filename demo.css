@@ -15,8 +15,12 @@ canvas.pressed {
 .lbl_btn {
   background-color: yellow;
 }
-div.inst_section {
+div.inst-section {
+  display: inline-block;
 }
 div.base_btn {
   margin: 1em 0.5em 0 0;
+}
+div.io-select {
+  display: block;
 }

@@ -1,10 +1,13 @@
 // uses combos
-class IOSelect {
+class IOSelect extends Section {
   constructor(el, midiAccess) {
+    super(el, { name : null, widgets : [] });
     this.midiAccess = midiAccess;
     this.update_io();
-    this.input_combo = new Combo(el, this.inputs.labels, this.inputs.options);
-    this.output_combo = new Combo(el, this.inputs.labels,this.outputs.options);
+    this.input_combo = new Combo(this.element, this.inputs.labels, this.inputs.options);
+    this.output_combo = new Combo(this.element, this.inputs.labels,this.outputs.options);
+    // override the Section class for the container div
+    this.element.parentNode.className = 'io-select';
   }
 
   _createIO(collection) {

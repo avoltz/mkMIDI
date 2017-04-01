@@ -1,8 +1,7 @@
 class Section {
   constructor(el, section) {
     let section_el = document.createElement("div");
-    section_el.style.display = 'inline-block';
-    section_el.className = 'inst_section';
+    section_el.className = 'inst-section';
     let name_lbl = document.createElement("span");
     name_lbl.innerHTML = section.name;
     section_el.appendChild(name_lbl);
