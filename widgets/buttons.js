@@ -37,7 +37,7 @@ class LabelButton extends Button {
     super(el, 'lbl_btn', 'a', height, width);
     this.element.href = "#";
     this.element.innerHTML = "<div></div>";
-    this.element = this.element.childNodes[0]; // forget parent, use div
+    this.element = this.element.firstChild; // forget parent, use div
 
     let lbl_el = document.createElement('label');
     lbl_el.innerHTML = label;
