@@ -8,15 +8,19 @@ class Combo {
       new_lbl.innerHTML = title;
       container.appendChild(new_lbl);
     }
-    this.create_select(container, labels, values);
-    el.appendChild(container);
+    this.container = container;
+    this.update(labels, values);
+    el.appendChild(this.container);
   }
 
-  clear_select(container) {
-    container.removeChild(container.childNodes[1]);
+  clear() {
+    if (this.container.childNodes.length > 0) {
+      this.container.removeChild(this.container.firstChild);
+    }
   }
 
-  create_select(container, labels, values) {
+  update(labels, values) {
+    this.clear();
     if (labels.length != values.length) {
       console.log('Combo: len of labels != values');
     }
@@ -29,7 +33,7 @@ class Combo {
       op.value = values[i++];
       new_el.appendChild(op);
     });
-    container.appendChild(new_el);
+    this.container.appendChild(new_el);
     this.element = new_el;
   }
 }
