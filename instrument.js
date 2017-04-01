@@ -3,8 +3,9 @@ class Section {
     let section_el = document.createElement("div");
     section_el.style.display = 'inline-block';
     section_el.className = 'inst_section';
-    let name_lbl = document.createElement("label");
+    let name_lbl = document.createElement("span");
     name_lbl.innerHTML = section.name;
+    section_el.appendChild(name_lbl);
     section.widgets.forEach(widget => {
       var args = ["thisarg", section_el];
       // if we are creating a section, we have to reference ourself.
@@ -17,6 +18,7 @@ class Section {
       let child = new (Function.prototype.bind.apply(Section.classes[widget.type], args))();
     });
     el.appendChild(section_el);
+    this.element = section_el; // allows contents to be removed without label
   }
   static add_class(name, cls, params) {
     Section.classes[name] = cls;
