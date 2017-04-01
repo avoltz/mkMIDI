@@ -8,11 +8,21 @@ class Combo {
       new_lbl.innerHTML = title;
       container.appendChild(new_lbl);
     }
-    let new_el = document.createElement("select");
-    let i = 0;
+    this.create_select(container, labels, values);
+    el.appendChild(container);
+  }
+
+  clear_select(container) {
+    container.removeChild(container.childNodes[1]);
+  }
+
+  create_select(container, labels, values) {
     if (labels.length != values.length) {
       console.log('Combo: len of labels != values');
     }
+    let new_el = document.createElement("select");
+    let i = 0;
+
     labels.forEach(label => {
       let op = document.createElement("option");
       op.innerHTML = label;
@@ -20,7 +30,6 @@ class Combo {
       new_el.appendChild(op);
     });
     container.appendChild(new_el);
-    el.appendChild(container);
     this.element = new_el;
   }
 }
