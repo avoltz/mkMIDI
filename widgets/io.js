@@ -21,12 +21,12 @@ class IOSelect extends Section {
   }
 
   update() {
-    if (this.inputs.length == 0) {
+    if (this.inputs.length === 0) {
       this.input_combo.clear();
     } else {
       this.input_combo.update(this.inputs.labels, this.inputs.options);
     }
-    if (this.outputs.length == 0) {
+    if (this.outputs.length === 0) {
       this.output_combo.clear();
     } else {
       this.output_combo.update(this.outputs.labels, this.outputs.options);
