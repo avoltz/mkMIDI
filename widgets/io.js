@@ -1,14 +1,19 @@
 // uses combos
-class IOSelect extends Section {
-  constructor(el, midiAccess) {
-    super(el, { name : null, widgets : [] });
-    this.midiAccess = midiAccess;
+class IOSelect {
+  constructor(el) {
+    this.element = document.createElement("div");
+    this.element.className = 'io-select';
+    let name = document.createElement("span");
+    name.innerHTML = "I/O Select";
+    this.element.appendChild(name);
+    this._midiAccess = { inputs: [], outputs: [] };
     this.update_io();
     this.input_combo = new Combo(this.element, this.inputs.labels, this.inputs.options);
     this.output_combo = new Combo(this.element, this.inputs.labels,this.outputs.options);
-    // override the Section class for the container div
-    this.element.parentNode.className = 'io-select';
+    el.appendChild(this.element);
   }
+
+  set midiAccess(m) { this._midiAccess = m; }
 
   _createIO(collection) {
     let ops = [];
@@ -34,9 +39,7 @@ class IOSelect extends Section {
   }
 
   update_io() {
-    this.inputs = this._createIO(this.midiAccess.inputs);
-    this.outputs = this._createIO(this.midiAccess.outputs);
+    this.inputs = this._createIO(this._midiAccess.inputs);
+    this.outputs = this._createIO(this._midiAccess.outputs);
   }
 }
-
-Section.add_class('io_select', IOSelect, ['midiAccess']); 

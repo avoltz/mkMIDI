@@ -33,12 +33,14 @@ class Instrument {
       // section
       let s = new Section(el, section);
     });
+    this.io_select = new IOSelect(synth_el, { inputs: [], outputs: [] });
+    el.appendChild(synth_el);
     this.midi_control = new MidiControl();
   }
 }
-{
+(function() {
   // setup our static vars
   Section.classes = {};
   Section.params = {};
   Section.add_class('section', Section, []);
-}
+})();
