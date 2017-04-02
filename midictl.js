@@ -16,13 +16,24 @@ class MidiParam {
 class MidiControl {
   // preferred is the preferred interface string name
   // TODO: keep 'preferred' in html storage
-  constructor(preferred) {
-    navigator.requestMIDIAccess({sysex: true}).then(
-      function onMIDISuccess(midiAccess) {
-        console.log(this);
-      },
-      function onMIDIFailure(midiAccess) {
-        console.log(this);
-      });
+  constructor(io_select, preferred) {
+    this.midiAccess = { inputs: [], outputs: [] };
+    this.response = false;
+    this.allowed = false;
+    this.io_select = io_select;
+    let _this = this;
+    let onMIDISuccess = function(midiAccess) {
+      _this.midiAccess = midiAccess;
+      _this.allow();
+    };
+    let onMIDIFailure = function(midiAccess) {
+      console.log('MIDI access denied');
+    };
+    navigator.requestMIDIAccess({sysex: true}).then(onMIDISuccess, onMIDIFailure);
+  }
+
+  allow() {
+    this.allowed = true;
+    this.io_select.update(this.midiAccess);
   }
 }

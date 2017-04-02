@@ -35,7 +35,7 @@ class Instrument {
     });
     this.io_select = new IOSelect(synth_el, { inputs: [], outputs: [] });
     el.appendChild(synth_el);
-    this.midi_control = new MidiControl();
+    this.midi_control = new MidiControl(this.io_select);
   }
 }
 (function() {
