@@ -1,0 +1,29 @@
+.editor-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.5em;
+}
+.editor-container.col {
+  flex-direction: column;
+}
+.editor-controls {
+  border: 1px #aaa solid;
+  padding: 0.2em;
+  flex-grow: 1;
+}
+.editor-controls {
+  order: 0
+}
+.editor-controls.right {
+  order: 2;
+}
+.instrument {
+  order: 1;
+  flex-grow: 5;
+  background-color: tomato;
+  min-height: 50px;
+}
+.editor-control-params {
+  display: flex;
+  flex-direction: column;
+}
