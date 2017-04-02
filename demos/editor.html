@@ -12,17 +12,11 @@
 </head>
 <body>
 <h1>Editor</h1>
-<div class="editor-container">
-  <div class="editor-controls right">
-    <a href="javascript:void(0);" class="editor-swap-view">Swap View</a>
-  </div>
-  <div id="synth" class="instrument">
-  </div>
-</div>
+<a href="javascript:void(0);" class="editor-swap-view">Swap View</a>
+<div id="editor"></div>
 <script type="text/javascript">
 (function(){
-  let my_synth = {"name" : "New Synth", "sections" : []};
-  let inst = new Instrument(document.getElementById("synth"), my_synth);
+  let editor = new Editor("editor");
 })();
 </script>
 </body>
