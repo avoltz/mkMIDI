@@ -33,6 +33,7 @@ class Instrument {
       // section
       let s = new Section(el, section);
     });
+    this.midi_control = new MidiControl();
   }
 }
 {
