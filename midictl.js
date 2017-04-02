@@ -29,11 +29,16 @@ class MidiControl {
     let onMIDIFailure = function(midiAccess) {
       console.log('MIDI access denied');
     };
+    this.midi_connection_event = function(evt) {
+      _this.io_select.update(_this.midiAccess);
+    };
+
     navigator.requestMIDIAccess({sysex: true}).then(onMIDISuccess, onMIDIFailure);
   }
 
   allow() {
     this.allowed = true;
+    this.midiAccess.onstatechange = this.midi_connection_event;
     this.io_select.update(this.midiAccess);
   }
 }
