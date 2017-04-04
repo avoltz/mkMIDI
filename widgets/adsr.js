@@ -1,5 +1,14 @@
+/*
+params {
+ a: { nrpn : int, cc : optional },
+ d: { nrpn : int, cc : optional },
+ s: { nrpn : int, cc : optional },
+ r: { nrpn : int, cc : optional }
+}
+*/
+
 class ADSRView {
-  constructor(el, max, height, width, values) {
+  constructor(el, max, height, width) {
     let wrapper = document.createElement("div");
     wrapper.style.display = 'inline-block';
     wrapper.className = 'adsrview';
@@ -9,15 +18,16 @@ class ADSRView {
     this.element.width = width;
     this.width = width / 4;
     this.max = max;
+    this.attack = 0;
+    this.decay = 0;
+    this.release = 0;
+    this.sustain = 0;
     wrapper.appendChild(this.element);
     el.appendChild(wrapper);
-    if (typeof(values) != 'undefined') {
-      let [a, d, s, r] = values;
-      this.set_values(a, d, s, r);
-    }
+    this.set_values(0,0,0,0);
   }
 
-  set_values(a, d, s, r) {
+  set_values() {
     var ctx = this.element.getContext("2d");
     ctx.clearRect(0,0,this.width,this.height);
     ctx.beginPath();
@@ -26,13 +36,13 @@ class ADSRView {
 
     // attack goes to top, start from bottom of canvas
     ctx.moveTo(0, this.height);
-    var atx = (a / this.max) * this.width;
+    var atx = (this.attack / this.max) * this.width;
     ctx.lineTo(atx, 0);
     offset += atx;
 
     // decay is the time to reach sustain level
-    var susy = this.height - (s / this.max) * this.height;
-    var dx = (d / this.max) * this.width;
+    var susy = this.height - (this.sustain / this.max) * this.height;
+    var dx = (this.decay / this.max) * this.width;
     ctx.lineTo(offset + dx, susy);
     offset += dx;
 
@@ -41,7 +51,7 @@ class ADSRView {
     offset += this.width;
 
     // release
-    var rx = (r / this.max) * this.width;
+    var rx = (this.release / this.max) * this.width;
     ctx.lineTo(offset + rx, this.height);
 
     ctx.stroke();
