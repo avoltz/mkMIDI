@@ -8,7 +8,7 @@ module.exports = function(grunt) {
       }
     },
     exec: {
-      server: 'http-server'
+      server: './ssl-server.sh'
     }
   });
 
