@@ -1,5 +1,5 @@
-import IOSelect from 'io';
-import MidiControl from 'midictl';
+import IOSelect from 'elements/io';
+import MidiControl from 'lib/midictl';
 
 // this is a ui class really
 export class Instrument {

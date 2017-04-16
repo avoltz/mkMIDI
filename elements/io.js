@@ -1,4 +1,6 @@
-// uses combos
+import Combo from 'midi/combos';
+
+// this special element reflects the i/o binding for the midi controller
 export class IOSelect {
   constructor(el) {
     this.element = document.createElement("div");
