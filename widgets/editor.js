@@ -1,4 +1,6 @@
-class Editor {
+import Instrument from '../instrument';
+
+export class Editor {
   constructor(id) {
     let container = document.getElementById(id);
     if (typeof(container) === 'undefined') {

@@ -1,4 +1,6 @@
-class Combo {
+import Section from 'section';
+
+export class Combo {
   constructor(el, labels, values, title) {
     let container = document.createElement("div");
     container.style.display = 'inline-block';

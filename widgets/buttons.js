@@ -1,3 +1,5 @@
+import Section from 'section';
+
 class Button {
   constructor(el, style, cls, height, width) {
     this.pressed = false;

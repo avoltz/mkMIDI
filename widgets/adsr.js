@@ -1,3 +1,5 @@
+import Section from 'section';
+
 /*
 params {
  a: { nrpn : int, cc : optional },

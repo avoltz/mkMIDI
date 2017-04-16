@@ -1,5 +1,5 @@
 // uses combos
-class IOSelect {
+export class IOSelect {
   constructor(el) {
     this.element = document.createElement("div");
     this.element.className = 'io-select';

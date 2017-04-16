@@ -1,4 +1,5 @@
-class Slider {
+import Section from 'section';
+export class Slider {
   constructor(el, title) {
     this.value = 0;
     let container = document.createElement("div");
