@@ -1,10 +1,9 @@
-// we need to import all the midi elements for the add_child function below
-import { Button, LabelButton, GroupButton, TriangleButton, SquareButton, SawtoothButton } from 'midi/buttons';
-import Combo from 'midi/combos';
-import Slider from 'midi/slider';
+// some module 'static' vars...
+var classes = {};
+var params = {};
 
 // this is a special widget responsible for creating all other widgets
-export class Section {
+export default class Section {
   constructor(el, section) {
     this.element = document.createElement("div");
     this.element.className = 'inst-section';
@@ -36,11 +35,9 @@ export class Section {
   }
 
   static add_class(name, cls, params) {
-    Section.classes[name] = cls;
-    Section.params[name] = params;
+    classes[name] = cls;
+    params[name] = params;
   }
 }
 // setup our static vars
-Section.classes = {};
-Section.params = {};
 Section.add_class('section', Section, []);

@@ -1,7 +1,7 @@
-import IOSelect from 'elements/io';
-import MidiControl from 'lib/midictl';
+import Section from './elements/section';
+import IOSelect from './elements/io';
+import MidiControl from './lib/midicontrol';
 
-// this is a ui class really
 export class Instrument {
   constructor(el, model) {
     let synth_el = document.createElement("div");
@@ -18,3 +18,5 @@ export class Instrument {
     el.style.display = 'block'; // hide for now
   }
 }
+
+export default { Instrument };

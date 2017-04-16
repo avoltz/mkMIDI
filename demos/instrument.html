@@ -1,12 +1,6 @@
 <html>
 <head>
-<script src="/instrument.js" type="text/javascript"></script>
-<script src="/widgets/adsr.js" type="text/javascript"></script>
-<script src="/widgets/buttons.js" type="text/javascript"></script>
-<script src="/widgets/combos.js" type="text/javascript"></script>
-<script src="/widgets/io.js" type="text/javascript"></script>
-<script src="/midictl.js" type="text/javascript"></script>
-<script src="/widgets/slider.js" type="text/javascript"></script>
+<script src="/dist/mkmidi-instrument.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="/demo.css">
 <script type="text/javascript">
 var my_synth = {
@@ -78,7 +72,7 @@ var my_synth = {
 <div id="synth"></div>
 <script type="text/javascript">
 (function(){
-  let inst = new Instrument(document.getElementById("synth"), my_synth);
+  let inst = new mkmidi.Instrument(document.getElementById("synth"), my_synth);
 })();
 </script>
 </body>

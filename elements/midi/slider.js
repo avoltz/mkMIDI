@@ -1,5 +1,5 @@
-import MidiWidget from 'base';
-import Section from 'section';
+import MidiWidget from './midiwidget';
+import Section from '../section';
 
 export class Slider extends MidiWidget {
   constructor(el, title) {

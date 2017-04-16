@@ -1,7 +1,7 @@
-import MidiWidget from 'base';
-import Section from 'section';
+import MidiWidget from './midiwidget';
+import Section from '../section';
 
-export class Combo extends MidiWidget {
+export default class Combo extends MidiWidget {
   constructor(el, labels, values, title) {
     super();
     let container = document.createElement("div");

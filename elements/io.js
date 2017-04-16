@@ -1,7 +1,7 @@
-import Combo from 'midi/combos';
+import Combo from './midi/combos';
 
 // this special element reflects the i/o binding for the midi controller
-export class IOSelect {
+export default class IOSelect {
   constructor(el) {
     this.element = document.createElement("div");
     this.element.className = 'io-select';

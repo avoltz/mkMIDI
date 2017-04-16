@@ -8,11 +8,13 @@ module.exports = function(grunt) {
       }
     },
     exec: {
+      webpack_editor: './node_modules/webpack/bin/webpack.js --config editor.webpack.config.js',
+      webpack_instrument: './node_modules/webpack/bin/webpack.js --config instrument.webpack.config.js',
       server: './ssl-server.sh'
     },
     babel: {
       options: {
-        presets: ['env']
+        presets: [['env', { 'targets': ['chrome'] } ]]
       },
       dist: {
         files: {
@@ -28,5 +30,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-babel');
 
   grunt.registerTask('default', ['jshint']);
-  grunt.registerTask('server', ['exec', 'server']);
+  grunt.registerTask('server', ['exec:server']);
+  grunt.registerTask('webpack', ['exec:webpack_editor', 'exec:webpack_instrument']);
 };

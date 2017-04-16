@@ -1,4 +1,5 @@
-import Instrument from 'instrument';
+import Instrument from './instrument';
+import Section from './elements/section';
 
 export class Editor {
   constructor(id) {
@@ -15,7 +16,7 @@ export class Editor {
     let instrument_element = document.createElement("div");
     instrument_element.className = "instrument";
     let my_synth = {"name" : "New Synth", "sections" : []};
-    this.instrument = new Instrument(instrument_element, my_synth);
+    this.instrument = new Instrument.Instrument(instrument_element, my_synth);
 
     /* setup the view swap links */
     let links = document.getElementsByClassName("editor-swap-view");
@@ -69,3 +70,5 @@ export class Editor {
     container.appendChild(controls);
   }
 }
+
+export default { Editor };

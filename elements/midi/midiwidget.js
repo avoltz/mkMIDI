@@ -1,4 +1,4 @@
-class MidiWidget {
+export default class MidiWidget {
   /* params is a list of param:
      {
        name: string,
