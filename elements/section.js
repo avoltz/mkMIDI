@@ -1,7 +1,7 @@
 // we need to import all the midi elements for the add_child function below
-import * from 'midi/buttons';
-import * from 'midi/combos';
-import * from 'midi/slider';
+import { Button, LabelButton, GroupButton, TriangleButton, SquareButton, SawtoothButton } from 'midi/buttons';
+import Combo from 'midi/combos';
+import Slider from 'midi/slider';
 
 // this is a special widget responsible for creating all other widgets
 export class Section {
