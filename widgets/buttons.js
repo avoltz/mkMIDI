@@ -1,7 +1,9 @@
+import MidiWidget from 'base';
 import Section from 'section';
 
-class Button {
+export class Button extends MidiWidget {
   constructor(el, style, cls, height, width) {
+    super();
     this.pressed = false;
     this.parent_element = el;
     let owner = document.createElement('div');
@@ -34,7 +36,7 @@ class Button {
   set width(w) { this._width = w; }
 }
 
-class LabelButton extends Button {
+export class LabelButton extends Button {
   constructor(el, label, height, width) {
     super(el, 'lbl_btn', 'a', height, width);
     this.element.href = "#";
@@ -55,7 +57,7 @@ class LabelButton extends Button {
 }
 Section.add_class('lbl_btn', LabelButton, ['label', 'height', 'width']);
 
-class CanvasButton extends Button {
+export class CanvasButton extends Button {
   constructor(el, style, height, width) {
     super(el, style, 'canvas',  height, width);
     this.element.height = height;
@@ -78,7 +80,7 @@ class CanvasButton extends Button {
   set width(w) { this.element.width = w; }
 }
 
-class GroupButton extends CanvasButton {
+export class GroupButton extends CanvasButton {
   constructor(el, size) {
     super(el, 'grp_btn', size, size);
     this.draw();
@@ -98,7 +100,7 @@ class GroupButton extends CanvasButton {
 }
 Section.add_class('grp_btn', GroupButton, ['size']);
 
-class WaveShapeButton extends CanvasButton {
+export class WaveShapeButton extends CanvasButton {
   constructor(el, style, height, width) {
     super(el, style, height, width);
     this.draw();
@@ -121,7 +123,7 @@ class WaveShapeButton extends CanvasButton {
 
 }
 
-class TriangleButton extends WaveShapeButton {
+export class TriangleButton extends WaveShapeButton {
   constructor(el, height, width) {
     super(el, 'tri_btn', height, width);
   }
@@ -141,7 +143,7 @@ class TriangleButton extends WaveShapeButton {
 }
 Section.add_class('tri_btn', TriangleButton, ['height', 'width']);
 
-class SquareButton extends WaveShapeButton {
+export class SquareButton extends WaveShapeButton {
   constructor(el, height, width) {
     super(el, 'sq_btn', height, width);
   }
@@ -169,7 +171,7 @@ class SquareButton extends WaveShapeButton {
 }
 Section.add_class('sq_btn', SquareButton, ['height', 'width']);
 
-class SawtoothButton extends WaveShapeButton {
+export class SawtoothButton extends WaveShapeButton {
   constructor(el, height, width) {
     super(el, 'saw_btn', height, width);
   }

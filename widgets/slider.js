@@ -1,6 +1,9 @@
+import MidiWidget from 'base';
 import Section from 'section';
-export class Slider {
+
+export class Slider extends MidiWidget {
   constructor(el, title) {
+    super();
     this.value = 0;
     let container = document.createElement("div");
     container.className = 'slider';

@@ -1,7 +1,9 @@
+import MidiWidget from 'base';
 import Section from 'section';
 
-export class Combo {
+export class Combo extends MidiWidget {
   constructor(el, labels, values, title) {
+    super();
     let container = document.createElement("div");
     container.style.display = 'inline-block';
     container.className = 'combo';
