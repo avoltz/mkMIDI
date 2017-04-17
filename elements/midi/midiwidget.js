@@ -10,9 +10,6 @@ export default class MidiWidget {
   */
   constructor() {
     this.params = [];
-
-    /* register as something to be watched */
-    MidiControl.bind(this);
   }
 
   // set this.params

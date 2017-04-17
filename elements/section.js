@@ -1,7 +1,3 @@
-// some module 'static' vars...
-var classes = {};
-var params = {};
-
 // this is a special widget responsible for creating all other widgets
 export default class Section {
   constructor(el, section) {
@@ -35,9 +31,11 @@ export default class Section {
   }
 
   static add_class(name, cls, params) {
-    classes[name] = cls;
-    params[name] = params;
+    Section.classes[name] = cls;
+    Section.params[name] = params;
   }
 }
 // setup our static vars
+Section.params = {};
+Section.classes = {};
 Section.add_class('section', Section, []);

@@ -1,5 +1,9 @@
 import Section from './elements/section';
 import IOSelect from './elements/io';
+import ADSRView from './elements/midi/adsr';
+import { Button, LabelButton, GroupButton, TriangleButton, SquareButton, SawtoothButton } from './elements/midi/buttons';
+import Combo from './elements/midi/combos';
+import Slider from './elements/midi/slider';
 import MidiControl from './lib/midicontrol';
 
 export class Instrument {
