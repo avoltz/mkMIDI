@@ -10,7 +10,6 @@
   "devDependencies": {
     "babel-preset-env": "^1.4.0",
     "grunt": "^1.0.1",
-    "grunt-babel": "^6.0.0",
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-exec": "^2.0.0",
     "http-server": "^0.9.0",
