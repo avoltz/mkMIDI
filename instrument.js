@@ -7,8 +7,8 @@ export class Instrument {
     let synth_el = document.createElement("div");
     el.style.display = 'none'; // hide for now
     this.name = model.name;
-    this.io_select = new IOSelect(synth_el, { inputs: [], outputs: [] });
     this.midi_control = new MidiControl(this);
+    this.io_select = new IOSelect(synth_el, { inputs: [], outputs: [] });
     // create the widgets, flat model
     this.sections = [];
     model.sections.forEach(section => {
