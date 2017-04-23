@@ -17,18 +17,24 @@ export class Slider extends MidiWidget {
     }
     let new_el = document.createElement("input");
     new_el.type = "range";
+    new_el.min = slider.min; // not always set
+    new_el.max = slider.max; // not always set
     new_el.value = this.value;
-    let value_el = document.createElement("label");
-    value_el.innerHTML = this.value;
+    this.value_el = document.createElement("label");
+    this.value_el.innerHTML = this.value;
     container.appendChild(new_el);
-    container.appendChild(value_el);
+    container.appendChild(this.value_el);
     el.appendChild(container);
-    new_el.onchange = this.send_update;
+    let self = this;
+    new_el.onchange = function() {
+      self.value_el.innerHTML = self.value = new_el.value;
+      self.send_update();
+    };
     this.element = new_el;
   }
 
   update(value) {
-    this.element.value = value;
+    this.value_el.innerHTML = this.element.value = this.value = value;
   }
 }
 
