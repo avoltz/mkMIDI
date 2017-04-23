@@ -44,7 +44,7 @@ export default class IOSelect {
     }
   }
 
-  set_midi_access(midiAccess) { this.midiAccess = midiAccess; };
+  set_midi_access(midiAccess) { this.midiAccess = midiAccess; }
 
   update(midiAccess) {
     let inputs = this._createIO(midiAccess.inputs);

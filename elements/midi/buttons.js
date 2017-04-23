@@ -15,7 +15,7 @@ export class Button extends MidiWidget {
     {
       let self = this;
       owner.onclick = function() {
-        self.set_value(self.value === self.on ? self.off : self.on);
+        self.set_value(self.value == self.on ? self.off : self.on);
         self.send_update();
       };
     }
@@ -29,9 +29,7 @@ export class Button extends MidiWidget {
   }
 
   set_value(value) {
-    console.log(`comparing ${value} to ${this.on}`);
     this.element.className = value == this.on ? `${this.div_style} pressed` : this.div_style;
-    console.log(`style updated ${this.element.className}`);
     this.value = value;
   }
 
