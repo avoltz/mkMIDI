@@ -6,9 +6,9 @@ export class Button extends MidiWidget {
     super(controller, button);
     this.parent_element = el;
     let owner = document.createElement('div');
-    let div_style = typeof(button.style) === 'undefined' ?
+    this.div_style = typeof(button.style) === 'undefined' ?
                     'mkm_btn' : `mkm_btn ${button.style}`;
-    owner.className = div_style;
+    owner.className = this.div_style;
     owner.style.position = 'relative';
     owner.style.display = 'inline-block';
     {
@@ -19,13 +19,14 @@ export class Button extends MidiWidget {
     }
     el.appendChild(owner);
     this.element = owner;
+    this.pressed_value = typeof(button.pressed_value) !== 'undefined' ? button.pressed_value : 1;
   }
   resize(height, width) {
     this.element.style.height = height;
     this.element.style.width = width;
   }
   update(value) {
-    this.element.className = value ? `${div_style} pressed` : div_style;
+    this.element.className = value === this.pressed_value ? `${this.div_style} pressed` : this.div_style;
     this.value = value;
     this.send_update();
   }
@@ -38,7 +39,7 @@ export class Button extends MidiWidget {
 export class LabelButton extends Button {
   constructor(controller, button, el) {
     super(controller, button, el);
-    let label = document.createTextNode(button.label);
+    let label = document.createTextNode(button.name);
     this.element.appendChild(label);
   }
 }
