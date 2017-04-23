@@ -3,17 +3,18 @@ canvas {
   border-radius: 0.2em;
   color: black;
 }
-canvas {
+.mkm_btn {
   background-color: white;
 }
-canvas:hover {
+.mkm_btn:hover {
   background-color: #ddd;
 }
-canvas.pressed {
+.mkm_btn.pressed {
   background-color: #aaa;
 }
 .lbl_btn {
   background-color: yellow;
+  padding: 1em;
 }
 div.inst-section {
   display: inline-block;

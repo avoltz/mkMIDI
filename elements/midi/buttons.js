@@ -6,30 +6,39 @@ export class Button extends MidiWidget {
     super(controller, button);
     this.parent_element = el;
     let owner = document.createElement('div');
-    this.div_style = typeof(button.style) === 'undefined' ?
-                    'mkm_btn' : `mkm_btn ${button.style}`;
+    this.div_style = `mkm_btn ${button.type}`;
     owner.className = this.div_style;
     owner.style.position = 'relative';
     owner.style.display = 'inline-block';
+    this.off = typeof(button.off) !== 'undefined' ? button.off : 0;
+    this.on = typeof(button.on) !== 'undefined' ? button.on : 1;
     {
       let self = this;
       owner.onclick = function() {
-        self.update(! button.value);
+        self.set_value(self.value === self.on ? self.off : self.on);
+        self.send_update();
       };
     }
     el.appendChild(owner);
     this.element = owner;
-    this.pressed_value = typeof(button.pressed_value) !== 'undefined' ? button.pressed_value : 1;
   }
+
   resize(height, width) {
     this.element.style.height = height;
     this.element.style.width = width;
   }
-  update(value) {
-    this.element.className = value === this.pressed_value ? `${this.div_style} pressed` : this.div_style;
+
+  set_value(value) {
+    console.log(`comparing ${value} to ${this.on}`);
+    this.element.className = value == this.on ? `${this.div_style} pressed` : this.div_style;
+    console.log(`style updated ${this.element.className}`);
     this.value = value;
-    this.send_update();
   }
+
+  update(value) {
+    this.set_value(value);
+  }
+
   get height() { return this._height; }
   get width() { return this._width; }
   set height(h) { this._height = h; }
@@ -49,9 +58,9 @@ let path_style = 'fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;
 let rect_style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1";
 
 class SVGButton extends Button {
-  constructor(controller, button, el, view_port, rect_height, rect_width, path_d) {
+  constructor(controller, button, el, rect_height, rect_width, path_d) {
     super(controller, button, el);
-    this.element.innerHTML = `<svg height="${button.height}" viewPort="0 0 ${rect_width} ${rect_height}">
+    this.element.innerHTML = `<svg height="${button.height}" viewBox="0 0 ${rect_width} ${rect_height}">
       <g>
         <rect style="${rect_style}" width="${rect_width}" height="${rect_height}" />
         <path style="${path_style}" d="${path_d}" />
