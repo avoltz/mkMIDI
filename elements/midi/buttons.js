@@ -83,7 +83,7 @@ Section.add_class('grp_btn', GroupButton);
 export class TriangleButton extends SVGButton {
   constructor(controller, button, el) {
     super(controller, button, el, '300', '500',
-      'm 25,225 150,150 150,-150 150,150'
+      'm 25,225 150,-150 150,150 150,-150'
     );
   }
 }
@@ -101,7 +101,7 @@ Section.add_class('sq_btn', SquareButton);
 export class SawtoothButton extends SVGButton {
   constructor(controller, button, el) {
     super(controller, button, el, '300', '500',
-      'm 25,225 150,0 0,-150 150,0 0,150 150,0 0,0'
+      'm 25,225 0,-150 150,150 0,-150 150,150 0,-150 150,150'
     );
   }
 }
