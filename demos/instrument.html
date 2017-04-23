@@ -3,6 +3,36 @@
 <script src="/dist/mkmidi-instrument.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="/demo.css">
 <script type="text/javascript">
+var dsi_mopho = {
+  name : 'Dave Smith Instruments - Mopho',
+  sections: [
+    {
+      name: 'Osc 1',
+      widgets: [
+        {
+          type: 'lbl_btn',
+          nrpn: 4,
+          name: 'Keyboard'
+        },
+        {
+          type: 'slider',
+          nrpn: 0,
+          max: 120,
+          name: 'Freq'
+        },
+        {
+          type: 'combo',
+          labels: ['off', 'saw', 'tri', 'saw+tri'],
+          values: [0, 1, 2, 3],
+          nrpn: 2,
+          name: 'Shape',
+          max: 103
+        }
+      ]
+    }
+  ]
+};
+/*
 var my_synth = {
   'name' : 'my synthesizer',
   'sections' : [
@@ -51,6 +81,11 @@ var my_synth = {
               'height' : 100,
               'width' : 200
             },
+
+use the model objects to serialize it back into a saveable instrument...
+
+Side problem: What about grouped widgets, like the group button... should that be a different
+subclass of midiwidget?
             {
               'type' : 'grp_btn',
               'size' : 20
@@ -66,6 +101,7 @@ var my_synth = {
     }
   ]
 };
+*/
 </script>
 </head>
 <body>
@@ -74,7 +110,7 @@ var my_synth = {
 <a href="/">Return home</a>
 <script type="text/javascript">
 (function(){
-  let inst = new mkmidi.Instrument(document.getElementById("synth"), my_synth);
+  let inst = new mkmidi.Instrument(document.getElementById("synth"), dsi_mopho);
 })();
 </script>
 </body>
