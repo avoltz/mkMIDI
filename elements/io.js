@@ -2,15 +2,25 @@ import Combo from './midi/combos';
 
 // this special element reflects the i/o binding for the midi controller
 export default class IOSelect {
-  constructor(el) {
+  constructor(controller, el) {
     this.element = document.createElement("div");
     this.element.className = 'io-select';
     let name = document.createElement("span");
     name.innerHTML = "I/O Select";
     this.element.appendChild(name);
-    this.input_combo = new Combo(this.element, [], []);
-    this.output_combo = new Combo(this.element, [], []);
+
+    this.input_combo = document.createElement('select');
+    this.input_combo.onchange = this.io_changed;
+    this.element.appendChild(this.input_combo);
+
+    this.output_combo = document.createElement('select');
+    this.output_combo.onchange = this.io_changed;
+    this.element.appendChild(this.output_combo);
+
+    this.controller = controller;
     el.appendChild(this.element);
+
+    this.midiAccess = undefined; // this is setup when update is called
   }
 
   _createIO(collection) {
@@ -23,18 +33,37 @@ export default class IOSelect {
     return { labels : labels, options : ops };
   }
 
+  _clear_combo(combo) {
+    while (combo.children.length > 0) {
+      combo.removeChild(combo.firstChild);
+    }
+  }
+
+  create_combo(combo, labels, options) {
+    _clear_combo(combo);
+    for (let i=0; i<labels.length;i++) {
+      let op = document.createElement('option');
+      op.text = labels[i];
+      op.value = options[i];
+      combo.appendChild(op);
+    }
+  }
+
   update(midiAccess) {
     let inputs = this._createIO(midiAccess.inputs);
     let outputs = this._createIO(midiAccess.outputs);
-    if (inputs.length === 0) {
-      this.input_combo.clear();
-    } else {
-      this.input_combo.update(inputs.labels, inputs.options);
-    }
-    if (outputs.length === 0) {
-      this.output_combo.clear();
-    } else {
-      this.output_combo.update(outputs.labels, outputs.options);
-    }
+    this.create_combo(this.input_combo, inputs.labels, inputs.options);
+    this.create_combo(this.output_combo, outputs.labels, outputs.options);
+    this.midiAccess = midiAccess;
+  }
+
+  io_changed() {
+    let input = this.midiAccess.inputs.get(
+      this.input_combo.options[this.input_combo.selected_index]
+    );
+    let output = this.midiAccess.outputs.get(
+      this.output_combo.options[this.output_combo.selected_index]
+    );
+    this.controller.setup_io(input, output);
   }
 }
