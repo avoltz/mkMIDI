@@ -1,5 +1,3 @@
-import Combo from './midi/combos';
-
 // this special element reflects the i/o binding for the midi controller
 export default class IOSelect {
   constructor(controller, el) {

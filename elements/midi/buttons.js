@@ -2,8 +2,8 @@ import MidiWidget from './midiwidget';
 import Section from '../section';
 
 export class Button extends MidiWidget {
-  constructor(constructor, button, el) {
-    super(constructor, button);
+  constructor(controller, button, el) {
+    super(controller, button);
     this.parent_element = el;
     let owner = document.createElement('div');
     let div_style = typeof(button.style) === 'undefined' ?
@@ -44,8 +44,9 @@ export class LabelButton extends Button {
 }
 Section.add_class('lbl_btn', LabelButton);
 
-var path_style = 'fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1';
-var rect_style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+let path_style = 'fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1';
+let rect_style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1";
+
 class SVGButton extends Button {
   constructor(controller, button, el, view_port, rect_height, rect_width, path_d) {
     super(controller, button, el);

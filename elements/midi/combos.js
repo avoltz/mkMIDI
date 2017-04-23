@@ -2,8 +2,8 @@ import MidiWidget from './midiwidget';
 import Section from '../section';
 
 export default class Combo extends MidiWidget {
-  constructor(constructor, combo, el) {
-    super(constructor, combo);
+  constructor(controller, combo, el) {
+    super(controller, combo);
     let container = document.createElement("div");
     container.style.display = 'inline-block';
     container.className = 'combo';

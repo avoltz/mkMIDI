@@ -12,11 +12,11 @@ export class Instrument {
     el.style.display = 'none'; // hide for now
     this.name = model.name;
     this.midi_control = new MidiControl(this);
-    this.io_select = new IOSelect(controller, synth_el);
+    this.io_select = new IOSelect(this.midi_control, synth_el);
     // create the widgets, flat model
     this.sections = [];
     model.sections.forEach(section => {
-      let s = new Section(el, section);
+      let s = new Section(this.midi_control, section, el);
     });
     el.appendChild(synth_el);
     el.style.display = 'block'; // hide for now

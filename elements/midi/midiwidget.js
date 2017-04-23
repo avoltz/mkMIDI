@@ -9,15 +9,14 @@ export default class MidiWidget {
   constructor(controller, model_object) {
     this.model_object = model_object;
     this.controller = controller;
-    this.uid = controller.get_uid();
     controller.bind_widget(this);
   }
 
-  get value() { return this.model_object.value }
-  set value(v) { this.model_object.value = v }
+  get value() { return this.model_object.value; }
+  set value(v) { this.model_object.value = v; }
   // these may return undefined
-  get cc() { return this.model_object.cc }
-  get nrpn() { return this.model_object.nrpn }
+  get cc() { return this.model_object.cc; }
+  get nrpn() { return this.model_object.nrpn; }
 
   update(value) {
     console.log('new value sent from controller.');
