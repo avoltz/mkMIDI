@@ -1,22 +1,29 @@
+/* Assumption, each widget only has one parameter.
+   Subclasses could override this, if the model is setup
+*/
 export default class MidiWidget {
-  /* params is a list of param:
-     {
-       name: string,
-       label: string, (a shorter version of name, like 'Osc 1 Mix')
-       nrpn: int,
-       cc : int, (optional)
-       max : int
-     }
+  /*
+    Pass the whole model object reference in. Each subclass can handle
+    unique parameters.
   */
-  constructor() {
-    this.params = [];
+  constructor(controller, model_object) {
+    this.model_object = model_object;
+    this.controller = controller;
+    this.uid = controller.get_uid();
+    controller.bind_widget(this);
   }
 
-  // set this.params
-  bind_params(params) {
+  get value() { return this.model_object.value }
+  set value(v) { this.model_object.value = v }
+  // these may return undefined
+  get cc() { return this.model_object.cc }
+  get nrpn() { return this.model_object.nrpn }
+
+  update(value) {
+    console.log('new value sent from controller.');
   }
 
-  // update the value of a param
-  update_param(param) {
+  send_update() {
+    controller.widget_updated(this);
   }
 }

@@ -10,16 +10,16 @@ params {
 */
 
 class ADSRView {
-  constructor(el, max, height, width) {
+  constructor(controller, adsr, el) {
     let wrapper = document.createElement("div");
     wrapper.style.display = 'inline-block';
     wrapper.className = 'adsrview';
     this.element = document.createElement("canvas");
-    this.element.height = height;
-    this.height = height;
-    this.element.width = width;
-    this.width = width / 4;
-    this.max = max;
+    this.element.height = adsr.height;
+    this.height = adsr.height;
+    this.element.width = adsr.width;
+    this.width = adsr.width / 4;
+    this.max = adsr.max;
     this.attack = 0;
     this.decay = 0;
     this.release = 0;
@@ -59,4 +59,4 @@ class ADSRView {
     ctx.stroke();
   }
 }
-Section.add_class('adsr', ADSRView, ['max', 'height', 'width', 'values']);
+Section.add_class('adsr', ADSRView);

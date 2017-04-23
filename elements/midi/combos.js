@@ -2,18 +2,18 @@ import MidiWidget from './midiwidget';
 import Section from '../section';
 
 export default class Combo extends MidiWidget {
-  constructor(el, labels, values, title) {
-    super();
+  constructor(constructor, combo, el) {
+    super(constructor, combo);
     let container = document.createElement("div");
     container.style.display = 'inline-block';
     container.className = 'combo';
     if (typeof(title) != 'undefined') {
       let new_lbl = document.createElement("label");
-      new_lbl.innerHTML = title;
+      new_lbl.innerHTML = combo.title;
       container.appendChild(new_lbl);
     }
     this.container = container;
-    this.update(labels, values);
+    this.create(combo.labels, combo.values);
     el.appendChild(this.container);
   }
 
@@ -23,7 +23,7 @@ export default class Combo extends MidiWidget {
     }
   }
 
-  update(labels, values) {
+  create(labels, values) {
     this.clear();
     if (labels.length != values.length) {
       console.log('Combo: len of labels != values');
@@ -37,9 +37,16 @@ export default class Combo extends MidiWidget {
       op.value = values[i++];
       new_el.appendChild(op);
     });
+    new_el.onchange = this.send_update;
     this.container.appendChild(new_el);
     this.element = new_el;
   }
+
+  update(value) {
+    this.element.options.forEach(o => {
+      o.selected = o.value === value;
+    });
+  }
 }
 
-Section.add_class('combo', Combo, ['labels', 'values', 'title']);
+Section.add_class('combo', Combo);

@@ -1,6 +1,7 @@
 // this is a special widget responsible for creating all other widgets
 export default class Section {
-  constructor(el, section) {
+  constructor(controller, section, el) {
+    this.controller = controller;
     this.element = document.createElement("div");
     this.element.className = 'inst-section';
     // name the section
@@ -15,15 +16,7 @@ export default class Section {
   }
 
   add_child(widget) {
-    var args = ["thisarg", this.element];
-    // if we are creating a section, we have to reference ourself.
-    if (widget.type == 'section') {
-      args.push(widget);
-    }
-    Section.params[widget.type].forEach(p => {
-      args.push(widget[p]);
-    });
-    let child = new (Function.prototype.bind.apply(Section.classes[widget.type], args))();
+    let child = new Section.classes[widget.type](this.controller, widget, this.element);
   }
 
   remove_child() {
@@ -32,10 +25,7 @@ export default class Section {
 
   static add_class(name, cls, params) {
     Section.classes[name] = cls;
-    Section.params[name] = params;
   }
 }
 // setup our static vars
-Section.params = {};
-Section.classes = {};
-Section.add_class('section', Section, []);
+Section.classes = { section: Section };
