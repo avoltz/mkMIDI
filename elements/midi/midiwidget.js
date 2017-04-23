@@ -23,6 +23,6 @@ export default class MidiWidget {
   }
 
   send_update() {
-    controller.widget_updated(this);
+    this.controller.widget_updated(this);
   }
 }

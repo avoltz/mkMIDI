@@ -1,5 +1,4 @@
 import Section from './elements/section';
-import IOSelect from './elements/io';
 import ADSRView from './elements/midi/adsr';
 import { Button, LabelButton, GroupButton, TriangleButton, SquareButton, SawtoothButton } from './elements/midi/buttons';
 import Combo from './elements/midi/combos';
@@ -11,8 +10,7 @@ export class Instrument {
     let synth_el = document.createElement("div");
     el.style.display = 'none'; // hide for now
     this.name = model.name;
-    this.midi_control = new MidiControl(this);
-    this.io_select = new IOSelect(this.midi_control, synth_el);
+    this.midi_control = new MidiControl(this, el);
     // create the widgets, flat model
     this.sections = [];
     model.sections.forEach(section => {

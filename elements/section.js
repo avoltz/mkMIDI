@@ -16,6 +16,7 @@ export default class Section {
   }
 
   add_child(widget) {
+    console.log(`adding child ${widget}`);
     let child = new Section.classes[widget.type](this.controller, widget, this.element);
   }
 

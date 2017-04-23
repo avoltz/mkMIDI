@@ -37,7 +37,11 @@ export default class Combo extends MidiWidget {
       op.value = values[i++];
       new_el.appendChild(op);
     });
-    new_el.onchange = this.send_update;
+    let self = this;
+    new_el.onchange = function() {
+      self.model_object.value = self.value = new_el.options[new_el.selectedIndex].value;
+      self.send_update();
+    };
     this.container.appendChild(new_el);
     this.element = new_el;
   }
@@ -46,6 +50,7 @@ export default class Combo extends MidiWidget {
     this.element.options.forEach(o => {
       o.selected = o.value === value;
     });
+    this.model_object.value = this.value = value;
   }
 }
 
