@@ -9,11 +9,11 @@ export default class IOSelect {
 
     this.input_combo = document.createElement('select');
     let self = this;
-    this.input_combo.onchange = function() { self.io_changed(); };
+    this.input_combo.onchange = function() { self.input_changed(); };
     this.element.appendChild(this.input_combo);
 
     this.output_combo = document.createElement('select');
-    this.output_combo.onchange = function() { self.io_changed(); };
+    this.output_combo.onchange = function() { self.output_changed(); };
     this.element.appendChild(this.output_combo);
 
     this.controller = controller;
@@ -55,7 +55,7 @@ export default class IOSelect {
     this.midiAccess = midiAccess;
   }
 
-  io_changed(evt) {
+  input_changed(evt) {
     if (typeof(this.midiAccess) === 'undefined') {
       console.log('io_changed but no midiAccess');
       return;
@@ -63,9 +63,17 @@ export default class IOSelect {
     let input = this.midiAccess.inputs.get(
       this.input_combo.options[this.input_combo.selectedIndex].value
     );
+    this.controller.set_input(input);
+  }
+
+  output_changed(evt) {
+    if (typeof(this.midiAccess) === 'undefined') {
+      console.log('io_changed but no midiAccess');
+      return;
+    }
     let output = this.midiAccess.outputs.get(
       this.output_combo.options[this.output_combo.selectedIndex].value
     );
-    this.controller.setup_io(input, output);
+    this.controller.set_output(output);
   }
 }
