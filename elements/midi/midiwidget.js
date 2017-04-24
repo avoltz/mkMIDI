@@ -11,9 +11,6 @@ export default class MidiWidget {
     this.controller = controller;
     controller.bind_widget(this);
   }
-
-  get value() { return this.model_object.value; }
-  set value(v) { this.model_object.value = v; }
   // these may return undefined
   get cc() { return this.model_object.cc; }
   get nrpn() { return this.model_object.nrpn; }
