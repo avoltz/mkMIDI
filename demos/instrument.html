@@ -21,26 +21,30 @@ var dsi_mopho = {
           name: 'Freq'
         },
         {
-          type: 'combo',
-          labels: ['off', 'saw', 'tri', 'saw+tri'],
-          values: [0, 1, 2, 3],
-          nrpn: 2,
-          name: 'Shape',
-          max: 103
-        },
-        {
           type: 'saw_btn',
           nrpn: 2,
           on: 1,
           is_on: [3],
-          height: 100
+          height: 50
+        },
+        {
+          type: 'grp_btn',
+          nrpn: 2,
+          on: 3,
+          height: 25
         },
         {
           type: 'tri_btn',
           nrpn: 2,
           on: 2,
           is_on: [3],
-          height: 100
+          height: 50
+        },
+        {
+          type: 'sq_btn',
+          nrpn: 2,
+          on: 4,
+          height: 50
         }
       ]
     }
