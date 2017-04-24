@@ -9,6 +9,15 @@ canvas {
 .mkm_btn:hover {
   background-color: #ddd;
 }
+@keyframes blinking_on {
+  from   {background-color:white;}
+  to  {background-color:#aaa;}
+}
+.mkm_btn.on {
+  animation-name: blinking_on;
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+}
 .mkm_btn.pressed {
   background-color: #aaa;
 }

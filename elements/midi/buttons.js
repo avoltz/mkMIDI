@@ -1,6 +1,12 @@
 import MidiWidget from './midiwidget';
 import Section from '../section';
 
+/*
+  Buttons have a few special params:
+  on: <int> -  Value to send when the button is pressed on (default 1)
+  off: <int> - Value to send when the button is pressed off (default 0)
+  is_on: <array of int> - Values for which button is shown pressed (default [])
+*/
 export class Button extends MidiWidget {
   constructor(controller, button, el) {
     super(controller, button);
@@ -12,11 +18,23 @@ export class Button extends MidiWidget {
     owner.style.display = 'inline-block';
     this.off = typeof(button.off) !== 'undefined' ? button.off : 0;
     this.on = typeof(button.on) !== 'undefined' ? button.on : 1;
+    // turn the button.on value into an array this.on
+    if (typeof(button.is_on) !== 'undefined') {
+      this.is_on = new Set(button.is_on);
+    } else {
+      this.is_on = new Set();
+    }
     {
       let self = this;
       owner.onclick = function() {
-        self.set_value(self.value == self.on ? self.off : self.on);
-        self.send_update();
+        if (self.value == self.off || self.is_on.has(self.value)) {
+          // turn on from the off or grouped-on state
+          self.set_value(self.on);
+          self.send_update();
+        } else if (self.value == self.on) {
+          self.set_value(self.off);
+          self.send_update();
+        }
       };
     }
     el.appendChild(owner);
