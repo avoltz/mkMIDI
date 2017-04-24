@@ -81,8 +81,8 @@ export class LabelButton extends Button {
 }
 Section.add_class('lbl_btn', LabelButton);
 
-let path_style = 'fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1';
-let rect_style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1";
+let path_style = 'fill:none;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1';
+let rect_style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1";
 
 class SVGButton extends Button {
   constructor(controller, button, el, rect_height, rect_width, path_d) {
