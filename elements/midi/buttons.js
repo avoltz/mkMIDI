@@ -11,13 +11,16 @@ export class Button extends MidiWidget {
   constructor(controller, button, el) {
     super(controller, button);
     this.parent_element = el;
+    let container = document.createElement('div');
+    let link = document.createElement('a');
     let owner = document.createElement('div');
     this.div_style = `mkm_btn ${button.type}`;
     owner.className = this.div_style;
-    owner.style.position = 'relative';
-    owner.style.display = 'inline-block';
+    container.style.position = 'relative';
+    container.style.display = 'inline-block';
     this.off = typeof(button.off) !== 'undefined' ? button.off : 0;
     this.on = typeof(button.on) !== 'undefined' ? button.on : 1;
+    this.value = this.off;
     // turn the button.on value into an array this.on
     if (typeof(button.is_on) !== 'undefined') {
       this.is_on = new Set(button.is_on);
@@ -26,18 +29,20 @@ export class Button extends MidiWidget {
     }
     {
       let self = this;
-      owner.onclick = function() {
-        if (self.value == self.off || self.is_on.has(self.value)) {
+      link.href = '#';
+      link.onclick = function() {
+        if (self.value !== self.on) {
           // turn on from the off or grouped-on state
           self.set_value(self.on);
-          self.send_update();
-        } else if (self.value == self.on) {
+        } else {
           self.set_value(self.off);
-          self.send_update();
         }
+        self.send_update();
       };
     }
-    el.appendChild(owner);
+    link.appendChild(owner);
+    container.appendChild(link);
+    el.appendChild(container);
     this.element = owner;
   }
 
@@ -47,7 +52,13 @@ export class Button extends MidiWidget {
   }
 
   set_value(value) {
-    this.element.className = value == this.on ? `${this.div_style} pressed` : this.div_style;
+    if (value == this.on) {
+      this.element.className = `${this.div_style} pressed`;
+    } else if (this.is_on.has(value)) {
+      this.element.className = `${this.div_style} on`;
+    } else {
+      this.element.className = this.div_style;
+    }
     this.value = value;
   }
 
