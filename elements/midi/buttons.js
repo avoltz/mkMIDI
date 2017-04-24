@@ -52,7 +52,7 @@ export class Button extends MidiWidget {
   }
 
   set_value(value) {
-    if (value == this.on) {
+    if (value === this.on) {
       this.element.className = `${this.div_style} pressed`;
     } else if (this.is_on.has(value)) {
       this.element.className = `${this.div_style} on`;
