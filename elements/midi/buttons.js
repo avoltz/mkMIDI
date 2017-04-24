@@ -121,7 +121,7 @@ Section.add_class('tri_btn', TriangleButton);
 export class SquareButton extends SVGButton {
   constructor(controller, button, el) {
     super(controller, button, el, '300', '500',
-      'm 25,225 150,0 0,150 150,0 0,-150, 150,0'
+      'm 25,225 150,0 0,-150 150,0 0,150, 150,0'
     );
   }
 }
