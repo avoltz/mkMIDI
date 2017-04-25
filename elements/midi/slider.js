@@ -1,9 +1,18 @@
 import MidiWidget from './midiwidget';
 import Section from '../section';
 
+/*
+  Sliders are used essentially instead of knobs, because knobs kind of suck
+  on the web / tiny screens.
 
-// probably need to add a model param to each widget.. this way we can grab
-// params from there.
+  There are a few special model params:
+
+  title:     - (optional) a name to display
+
+  max: <int> - Maximum value
+  min: <int> - (optional) Minimum value (display current value minus this)
+               default 0
+*/
 export class Slider extends MidiWidget {
   constructor(constructor, slider, el) {
     super(constructor, slider);
