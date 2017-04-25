@@ -16,9 +16,13 @@ import Section from '../section';
 export class Slider extends MidiWidget {
   constructor(constructor, slider, el) {
     super(constructor, slider);
-    this.min = typeof(slider.min) !== 'undefined' ? slider.min : 0;
+    if (typeof(slider.min) === 'undefined') {
+      this.min = 0;
+    } else {
+      this.min = slider.min;
+    }
+    this.value = 0;
     this.max = slider.max;
-    this.value = this.min;
     let container = document.createElement("div");
     container.className = 'slider';
     if (typeof(slider.title) !== 'undefined') {
@@ -28,8 +32,8 @@ export class Slider extends MidiWidget {
     }
     let new_el = document.createElement("input");
     new_el.type = "range";
-    new_el.min = this.min; // always set above
-    new_el.max = slider.max; // must always be set in model
+    new_el.min = 0;
+    new_el.max = (this.min > 0) ? slider.max - this.min : slider.max;
     new_el.value = this.value;
     this.value_el = document.createElement("label");
     this.value_el.innerHTML = this.value;
@@ -38,16 +42,19 @@ export class Slider extends MidiWidget {
     el.appendChild(container);
     let self = this;
     new_el.onchange = function() {
-      self.value_el.innerHTML = self.value = new_el.value;
+      self.value_el.innerHTML = new_el.value;
+      self.value = parseInt(new_el.value) + self.min;
       self.send_update();
     };
     this.element = new_el;
   }
 
   update(value) {
-    if (value >= this.element.min && value <= this.element.max) {
+    if (value >= this.min && value <= this.max) {
       this.element.disabled = false;
-      this.value_el.innerHTML = this.element.value = this.value = value;
+      this.element.value = value - this.min;;
+      this.value_el.innerHTML = this.element.value;
+      this.value = value;
     } else {
       this.element.disabled = true;
     }
