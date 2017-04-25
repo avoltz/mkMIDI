@@ -5,7 +5,13 @@ import Section from '../section';
   Buttons have a few special params:
   on: <int> -  Value to send when the button is pressed on (default 1)
   off: <int> - Value to send when the button is pressed off (default 0)
+
+  Optionals:
   is_on: <array of int> - Values for which button is shown pressed (default [])
+   <xor>
+  min: <int> - Minimum value for which it is pressed, default this.on
+  max: <int> - Maximum value for which it is pressed
+
 */
 export class Button extends MidiWidget {
   constructor(controller, button, el) {
@@ -18,21 +24,30 @@ export class Button extends MidiWidget {
     owner.className = this.div_style;
     container.style.position = 'relative';
     container.style.display = 'inline-block';
+    this.max = button.max;
+    this.min = button.min;
     this.off = typeof(button.off) !== 'undefined' ? button.off : 0;
-    this.on = typeof(button.on) !== 'undefined' ? button.on : 1;
-    this.value = this.off;
-    // turn the button.on value into an array this.on
-    if (typeof(button.is_on) !== 'undefined') {
-      this.is_on = new Set(button.is_on);
+    // set to null so that anytime we have a press we know to keep
+    // the old value - used when a button is linked to a range
+    if (typeof(button.on) === 'undefined') {
+      this.on = null;
+      this.value = this.min;
     } else {
-      this.is_on = new Set();
+      this.on = button.on;
+      this.value = this.off;
     }
+    // searchable collection of values which toggle 'on'
+    this.is_on = new Set(button.is_on);
     {
       let self = this;
       link.href = '#';
       link.onclick = function() {
-        if (self.value !== self.on) {
+        if (self.on === null) {
+          // we must set_value to toggle visually
+          self.set_value(self.value === self.off ? self.off : self.value);
+        } else if (self.value !== self.on || self.is_on.has(self.value)) {
           // turn on from the off or grouped-on state
+          // make the value sticky when on is null, keep old value
           self.set_value(self.on);
         } else {
           self.set_value(self.off);
@@ -52,14 +67,28 @@ export class Button extends MidiWidget {
   }
 
   set_value(value) {
-    if (value === this.on) {
-      this.element.className = `${this.div_style} pressed`;
-    } else if (this.is_on.has(value)) {
-      this.element.className = `${this.div_style} on`;
+    if (this.on !== null) {
+      if (value === this.on) {
+        this.element.className = `${this.div_style} pressed`;
+      } else if (this.is_on.has(value)) {
+        this.element.className = `${this.div_style} on`;
+      } else {
+        this.element.className = this.div_style;
+      }
+      this.value = value;
     } else {
-      this.element.className = this.div_style;
+      if (value >= this.min && value <= this.max) {
+        if (value !== this.off) {
+          this.element.className = `${this.div_style} pressed`;
+          this.value = value;
+        } else {
+          this.element.className = this.div_style;
+        }
+      } else {
+        this.element.className = this.div_style;
+      }
+
     }
-    this.value = value;
   }
 
   update(value) {

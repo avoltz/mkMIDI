@@ -7,7 +7,9 @@ import Section from '../section';
 export class Slider extends MidiWidget {
   constructor(constructor, slider, el) {
     super(constructor, slider);
-    this.value = 0;
+    this.min = typeof(slider.min) !== 'undefined' ? slider.min : 0;
+    this.max = slider.max;
+    this.value = this.min;
     let container = document.createElement("div");
     container.className = 'slider';
     if (typeof(slider.title) !== 'undefined') {
@@ -17,8 +19,8 @@ export class Slider extends MidiWidget {
     }
     let new_el = document.createElement("input");
     new_el.type = "range";
-    new_el.min = slider.min; // not always set
-    new_el.max = slider.max; // not always set
+    new_el.min = this.min; // always set above
+    new_el.max = slider.max; // must always be set in model
     new_el.value = this.value;
     this.value_el = document.createElement("label");
     this.value_el.innerHTML = this.value;
@@ -34,7 +36,12 @@ export class Slider extends MidiWidget {
   }
 
   update(value) {
-    this.value_el.innerHTML = this.element.value = this.value = value;
+    if (value >= this.element.min && value <= this.element.max) {
+      this.element.disabled = false;
+      this.value_el.innerHTML = this.element.value = this.value = value;
+    } else {
+      this.element.disabled = true;
+    }
   }
 }
 
