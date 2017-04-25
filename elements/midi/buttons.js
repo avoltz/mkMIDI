@@ -2,16 +2,21 @@ import MidiWidget from './midiwidget';
 import Section from '../section';
 
 /*
-  Buttons have a few special params:
-  on: <int> -  Value to send when the button is pressed on (default 1)
+  Buttons can set MIDI parameters, or behave as off-only switches for values
+  set by different widgets (like a slider).
+
+  Buttons have a few special model params:
+
+  on: <int> -  (optional) if set, send this value when pressed, otherwise behave
+               in the off-only manner. If on is not in the model, max and min are
+               required.
+
   off: <int> - Value to send when the button is pressed off (default 0)
 
-  Optionals:
-  is_on: <array of int> - Values for which button is shown pressed (default [])
-   <xor>
-  min: <int> - Minimum value for which it is pressed, default this.on
-  max: <int> - Maximum value for which it is pressed
+  is_on: <int-list>> - (optional) Values for which button is shown pressed
 
+  min: <int> - (optional) Minimum value for which it is pressed, default this.on
+  max: <int> - (optional) Maximum value for which it is pressed
 */
 export class Button extends MidiWidget {
   constructor(controller, button, el) {
