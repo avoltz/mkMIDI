@@ -1,0 +1,74 @@
+<html>
+<head>
+<script src="/dist/mkmidi-instrument.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/demo.css">
+<script type="text/javascript">
+var dsi_mopho = {
+  name : 'Dave Smith Instruments - Mopho',
+  sections: [
+    {
+      name: 'Osc 1',
+      widgets: [
+        {
+          type: 'lbl_btn',
+          nrpn: 4,
+          name: 'Keyboard',
+          on: 1,
+        },
+        {
+          type: 'slider',
+          nrpn: 0,
+          max: 120,
+          name: 'Freq'
+        },
+        {
+          type: 'saw_btn',
+          nrpn: 2,
+          on: 1,
+          is_on: [3],
+          height: 50
+        },
+        {
+          type: 'grp_btn',
+          nrpn: 2,
+          on: 3,
+          height: 25
+        },
+        {
+          type: 'tri_btn',
+          nrpn: 2,
+          on: 2,
+          is_on: [3],
+          height: 50
+        },
+        {
+          type: 'sq_btn',
+          nrpn: 2,
+          height: 50,
+          min: 4,
+          max: 103
+        },
+        {
+          type: 'slider',
+          nrpn: 2,
+          min: 4,
+          max: 103,
+          name: 'Pulse'
+        }
+      ]
+    }
+  ]
+};
+</script>
+</head>
+<body>
+<div id="synth"></div>
+<br/>
+<a href="/">Return home</a>
+<script type="text/javascript">
+(function(){
+  let inst = new mkmidi.Instrument(document.getElementById("synth"), dsi_mopho);
+})();
+</script>
+</body>
+</html>
