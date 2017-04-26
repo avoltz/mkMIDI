@@ -67,11 +67,6 @@ export class Button extends MidiWidget {
     this.element = owner;
   }
 
-  resize(height, width) {
-    this.element.style.height = height;
-    this.element.style.width = width;
-  }
-
   set_value(value) {
     if (this.on !== null) {
       if (value === this.on) {
@@ -104,10 +99,6 @@ export class Button extends MidiWidget {
     this.set_value(value);
   }
 
-  get height() { return this._height; }
-  get width() { return this._width; }
-  set height(h) { this._height = h; }
-  set width(w) { this._width = w; }
 }
 
 export class LabelButton extends Button {
