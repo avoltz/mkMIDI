@@ -36,6 +36,8 @@ export class Button extends MidiWidget {
     if (typeof(button.on) === 'undefined') {
       this.on = null;
       this.value = this.min;
+      // keep the last value for switching off
+      this.last_value = this.value;
     } else {
       this.on = button.on;
       this.value = this.off;
@@ -48,7 +50,7 @@ export class Button extends MidiWidget {
       link.onclick = function() {
         if (self.on === null) {
           // we must set_value to toggle visually
-          self.set_value(self.value === self.off ? self.off : self.value);
+          self.set_value(self.value !== self.off ? self.off : self.last_value);
         } else if (self.value !== self.on || self.is_on.has(self.value)) {
           // turn on from the off or grouped-on state
           // make the value sticky when on is null, keep old value
@@ -85,12 +87,14 @@ export class Button extends MidiWidget {
       if (value >= this.min && value <= this.max) {
         if (value !== this.off) {
           this.element.classList.add('pressed');
-          this.value = value;
+          this.last_value = value;
         } else {
           this.element.classList.remove('pressed');
         }
+        this.value = value;
       } else {
         this.element.classList.remove('pressed');
+        this.value = this.off;
       }
 
     }
