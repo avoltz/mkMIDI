@@ -24,7 +24,7 @@ export class Slider extends MidiWidget {
     this.value = 0;
     this.max = slider.max;
     let container = document.createElement("div");
-    container.className = 'slider';
+    container.className = 'mkm_slider';
     if (typeof(slider.title) !== 'undefined') {
       let new_lbl = document.createElement("label");
       new_lbl.innerHTML = slider.title;

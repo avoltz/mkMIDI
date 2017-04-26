@@ -6,7 +6,7 @@ export default class Combo extends MidiWidget {
     super(controller, combo);
     let container = document.createElement("div");
     container.style.display = 'inline-block';
-    container.className = 'combo';
+    container.className = 'mkm_combo';
     if (typeof(title) != 'undefined') {
       let new_lbl = document.createElement("label");
       new_lbl.innerHTML = combo.title;

@@ -13,7 +13,7 @@ class ADSRView {
   constructor(controller, adsr, el) {
     let wrapper = document.createElement("div");
     wrapper.style.display = 'inline-block';
-    wrapper.className = 'adsrview';
+    wrapper.className = 'mkm_adsrview';
     this.element = document.createElement("canvas");
     this.element.height = adsr.height;
     this.height = adsr.height;
