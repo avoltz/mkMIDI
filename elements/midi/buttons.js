@@ -91,7 +91,6 @@ export class Button extends MidiWidget {
         this.element.classList.remove('pressed');
         this.value = this.off;
       }
-
     }
   }
 
@@ -113,16 +112,20 @@ Section.add_class('lbl_btn', LabelButton);
 let path_style = 'fill:none;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1';
 let rect_style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1";
 
+/* SVGButton can take a height param for scaling */
 class SVGButton extends Button {
   constructor(controller, button, el, rect_height, rect_width, path_d) {
     super(controller, button, el);
-    this.element.innerHTML = `<svg height="${button.height}" viewBox="0 0 ${rect_width} ${rect_height}">
+    // viewBox is used for scaling, so only height is needed to maintain aspect ratio
+    let height = typeof(button.height) === 'undefined' ? 100 : button.height;
+    this.element.innerHTML = `<svg height="${height}" viewBox="0 0 ${rect_width} ${rect_height}">
       <g>
         <rect style="${rect_style}" width="${rect_width}" height="${rect_height}" />
         <path style="${path_style}" d="${path_d}" />
       </g></svg>`;
   }
-  resize(height, width) {
+
+  resize(height) {
     // maintains aspect ratio using viewPort
     this.element.firstChild.height = height;
   }
