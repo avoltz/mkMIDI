@@ -25,8 +25,7 @@ export class Button extends MidiWidget {
     let container = document.createElement('div');
     let link = document.createElement('a');
     let owner = document.createElement('div');
-    this.div_style = `mkm_btn ${button.type}`;
-    owner.className = this.div_style;
+    owner.className = `mkm_btn ${button.type}`;
     container.style.position = 'relative';
     container.style.display = 'inline-block';
     this.max = button.max;
@@ -74,23 +73,24 @@ export class Button extends MidiWidget {
   set_value(value) {
     if (this.on !== null) {
       if (value === this.on) {
-        this.element.className = `${this.div_style} pressed`;
+        this.element.classList.remove('on');
+        this.element.classList.add('pressed');
       } else if (this.is_on.has(value)) {
-        this.element.className = `${this.div_style} on`;
+        this.element.classList.add('on');
       } else {
-        this.element.className = this.div_style;
+        this.element.classList.remove('pressed', 'on');
       }
       this.value = value;
     } else {
       if (value >= this.min && value <= this.max) {
         if (value !== this.off) {
-          this.element.className = `${this.div_style} pressed`;
+          this.element.classList.add('pressed');
           this.value = value;
         } else {
-          this.element.className = this.div_style;
+          this.element.classList.remove('pressed');
         }
       } else {
-        this.element.className = this.div_style;
+        this.element.classList.remove('pressed');
       }
 
     }
